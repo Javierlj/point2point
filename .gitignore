@@ -1,4 +1,5 @@
 # Default ignored files
 /.idea
 /target
-/Point2point.iml
+
+/target/
