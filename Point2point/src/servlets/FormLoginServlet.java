@@ -26,12 +26,12 @@ public class FormLoginServlet extends HttpServlet {
         throws ServletException, IOException {
 		
 		String email = req.getParameter("email");
-		String contraseña = req.getParameter("contraseña");
+		String password = req.getParameter("password");
 		List<Usuario> usuarios = UsuarioDAOImplementation.getInstance().readAll();
 		//List<TFG> tfgs = TFGDAOImplementation.getInstance().readAll();
 		//TFG tfg = TFGDAOImplementation.getInstance().login(email, password);
-		Usuario usuario = UsuarioDAOImplementation.getInstance().login(email, contraseña);
-		if( ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(contraseña) ) {
+		Usuario usuario = UsuarioDAOImplementation.getInstance().login(email, password);
+		if( ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(password) ) {
 			req.getSession().setAttribute("admin", true);
 			req.getSession().setAttribute("usuarios", usuarios);
 			//req.getSession().setAttribute("tfgs", tfgs);			     

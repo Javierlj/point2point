@@ -9,6 +9,6 @@ public interface UsuarioDAO {
 	public void update(Usuario usuario);
 	public void delete(Usuario usuario);
 	public List<Usuario> readAll();
-	public Usuario login(String email, String contraseña);
+	public Usuario login(String email, String password);
 
 }

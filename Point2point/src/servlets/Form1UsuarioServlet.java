@@ -33,13 +33,13 @@ public class Form1UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = req.getParameter("email");
-		String password = req.getParameter("contraseña");
+		String password = req.getParameter("password");
 		String name = req.getParameter("name");
 		String apellidos = req.getParameter("apellidos");
 		//Professor advisor = ProfessorDAOImplementation.getInstance().read(advisorEmail);
 		Usuario usuario = new Usuario();
 		usuario.setEmail(email);
-		usuario.setContraseña(password);
+		usuario.setPassword(password);
 		usuario.setNombre(name);
 		usuario.setApellidos(apellidos);
 		UsuarioDAOImplementation.getInstance().create(usuario);

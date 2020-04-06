@@ -12,7 +12,7 @@ public class Usuario {
 	private String email;
 	private String nombre;
 	private String apellidos;
-	private String contraseña;
+	private String password;
 	@OneToMany(mappedBy = "advisor", fetch = FetchType.EAGER)
 	private List<Viaje> viajes_fav = new ArrayList<Viaje>();
 	
@@ -25,7 +25,7 @@ public class Usuario {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
-		result = prime * result + ((contraseña == null) ? 0 : contraseña.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((viajes_fav == null) ? 0 : viajes_fav.hashCode());
@@ -46,10 +46,10 @@ public class Usuario {
 				return false;
 		} else if (!apellidos.equals(other.apellidos))
 			return false;
-		if (contraseña == null) {
-			if (other.contraseña != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!contraseña.equals(other.contraseña))
+		} else if (!password.equals(other.password))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -72,7 +72,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", contraseña="
-				+ contraseña + ", viajes_fav=" + viajes_fav + "]";
+				+ password + ", viajes_fav=" + viajes_fav + "]";
 	}
 
 	public String getEmail() {
@@ -99,12 +99,12 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<Viaje> getViajes_fav() {
