@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Viaje {
+public class Viaje implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,7 @@ public class Viaje {
 
 	@ManyToOne
 	private Usuario advisor;
-	
+
 	public Viaje() {
 		super();
 	}

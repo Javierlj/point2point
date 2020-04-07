@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAOImplementation;
+import dao.ViajeDAOImplementation;
 import model.Usuario;
 import model.Viaje;
 
@@ -36,17 +38,20 @@ public class Form3ViajeFav extends HttpServlet {
 		String id = req.getParameter("id");
 		String origen = req.getParameter("origen");
 		String destino = req.getParameter("destino");
+
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		List<Viaje> viajes = usuario.getViajes_fav();
-		//Professor advisor = ProfessorDAOImplementation.getInstance().read(advisorEmail);
-		Viaje viaje= new Viaje();
+		Viaje viaje = new Viaje();
 		viaje.setId(id);
 		viaje.setOrigen(origen);
 		viaje.setDestino(destino);
 		viaje.setUsuario(usuario);
+
+		ViajeDAOImplementation.getInstance().create(viaje);
+
+		List<Viaje> viajes = (List<Viaje>) req.getSession().getAttribute("viajes");
 		viajes.add(viaje);
-		usuario.setViajes_fav(viajes);
-		UsuarioDAOImplementation.getInstance().update(usuario);
+
+		req.getSession().setAttribute("viajes", viajes);
 		req.getSession().setAttribute("usuario", usuario);
 		getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, resp);
 	}
