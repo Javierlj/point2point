@@ -40,8 +40,8 @@ public class Form1UsuarioServlet extends HttpServlet {
 		Usuario usuario = new Usuario();
 		usuario.setEmail(email);
 		usuario.setPassword(password);
-		usuario.setNombre(name);
-		usuario.setApellidos(apellidos);
+		usuario.setName(name);
+		usuario.setLast_name(apellidos);
 		UsuarioDAOImplementation.getInstance().create(usuario);
 		req.getSession().setAttribute("usuario", usuario);	
 		getServletContext().getRequestDispatcher("/index.html").forward(req, resp);

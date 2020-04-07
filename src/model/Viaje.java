@@ -5,11 +5,14 @@ import java.io.Serializable;
 
 @Entity
 public class Viaje {
+
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String id;
 	private String origen;
 	private String destino;
+
 	@ManyToOne
 	private Usuario advisor;
 	

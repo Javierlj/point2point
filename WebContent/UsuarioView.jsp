@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-<h2>Hola ${usuario.nombre}</h2>
+<h2>Hola ${usuario.name}</h2>
 <form action="Form2Viaje">
 	<input type="text" name="origen" placeholder="Origen">
 	<input type="text" name="destino" placeholder="Destino">

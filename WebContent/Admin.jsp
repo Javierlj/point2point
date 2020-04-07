@@ -17,8 +17,8 @@
 <c:forEach items="${usuarios}" var="usuarioi">
 <tr>
 <td>${usuarioi.email}</td>
-<td>${usuarioi.nombre}</td>
-<td>${usuarioi.apellidos}</td>
+<td>${usuarioi.name}</td>
+<td>${usuarioi.last_name}</td>
 </tr>
 </c:forEach>
 </table>
