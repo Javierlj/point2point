@@ -8,9 +8,10 @@
 </head>
 <body>
 <form action="FormPetitionServlet">
-	<input type="text" name="email" placeholder="Email">
-	<input type="password" name="password" placeholder="Password">
-	<button type="submit">Login</button>
+	<input type="text" name="latitude" placeholder="Latitude">
+	<input type="text" name="longitude" placeholder="Longitude">
+	<input type="text" name="radio" placeholder="Radio">
+	<button type="submit">Send</button>
 </form>
 </body>
 </html>

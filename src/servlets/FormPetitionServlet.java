@@ -23,25 +23,23 @@ public class FormPetitionServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	public FormPetitionServlet() {
-		serviceUrl = "http://global-n-mobike-g.mobike.com/api/nearby/v4/nearbyBikeInfo";
-		urlParameters  = "latitude=40.41&longitude=-3.7&scope=600";
+	public FormPetitionServlet() throws MalformedURLException {
+		System.out.print("url");
+		serviceUrl = new URL("http://global-n-mobike-g.mobike.com/api/nearby/v4/nearbyBikeInfo");
 	}
 	
-	private String serviceUrl;
-	private String urlParameters; 
+	private URL serviceUrl;
+
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		URL myURL = null;
-		
-		try {
-			myURL = new URL(serviceUrl);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
 	
 		try {
-			HttpURLConnection myURLConnection = (HttpURLConnection)myURL.openConnection();
+			String latitude = req.getParameter("latitude");
+			String longitude = req.getParameter("longitude");
+			String radio = req.getParameter("radio");
+			String urlParameters="latitude="+latitude+"&longitude="+longitude+"&scope="+radio; 
+			System.out.print(urlParameters);
+			HttpURLConnection myURLConnection = (HttpURLConnection)serviceUrl.openConnection();
 			byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 			int    postDataLength = postData.length;
 			myURLConnection.setRequestMethod("POST");
