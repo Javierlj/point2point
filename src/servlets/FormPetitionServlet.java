@@ -16,7 +16,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64; 
-
+import org.json.*;
 
 @WebServlet("/FormPetitionServlet")
 public class FormPetitionServlet extends HttpServlet{
@@ -40,6 +40,7 @@ public class FormPetitionServlet extends HttpServlet{
 			String radio = req.getParameter("radio");
 			String mobikeParameters="latitude="+latitude+"&longitude="+longitude+"&scope="+radio; 
 			String HiveParameters="latitude="+latitude+"&longitude="+longitude;
+			String[] companiesNames = {"Mobike","Hive"};
 			String[] parameters = new String[] {mobikeParameters,HiveParameters}; 
 			for(int i = 0 ; i<urls.length;i++) {
 				URL serviceUrl = urls[i];
@@ -64,8 +65,18 @@ public class FormPetitionServlet extends HttpServlet{
 			    for (int c; (c = in.read()) >= 0;)
 			        sb.append((char)c);
 			    String response = sb.toString();
-			    System.out.println(response);
+			    try {
+					JSONObject obj = new JSONObject(response);
+					System.out.println(response);
+					req.getSession().setAttribute(companiesNames[i], obj);
+				} catch (JSONException e) {
+					  System.out.println("Bad json");
+				}
+			
 			}
+			
+			//Redireccion
+			//resp.sendRedirect(req.getContextPath() + "/ServletName"); 
 
 		} catch (ProtocolException e) {
 			e.printStackTrace();

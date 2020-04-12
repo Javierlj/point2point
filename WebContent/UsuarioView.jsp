@@ -35,7 +35,6 @@
 </c:if>
 
 
-
 <h2>Añade un nuevo viaje favorito</h2>
 <form action="Form3ViajeFav">
     <input type="text" name="id" placeholder="Identificador del viaje">
