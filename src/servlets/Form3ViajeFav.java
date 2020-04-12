@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsuarioDAOImplementation;
-import dao.FavouritesDAOImplementation;
+import dao.FavouriteDAOImplementation;
 import model.Usuario;
-import model.Favourites;
+import model.Favourite;
 
 /**
  * Servlet implementation class Form3ViajeFav
@@ -40,15 +38,15 @@ public class Form3ViajeFav extends HttpServlet {
 		String destino = req.getParameter("destino");
 
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		Favourites favourite = new Favourites();
+		Favourite favourite = new Favourite();
 		favourite.setId(id);
 		favourite.setOrigen(origen);
 		favourite.setDestino(destino);
 		favourite.setUsuario(usuario);
 
-		FavouritesDAOImplementation.getInstance().create(favourite);
+		FavouriteDAOImplementation.getInstance().create(favourite);
 
-		List<Favourites> favourites = (List<Favourites>) req.getSession().getAttribute("favourites");
+		List<Favourite> favourites = (List<Favourite>) req.getSession().getAttribute("favourites");
 		favourites.add(favourite);
 
 		req.getSession().setAttribute("favourites", favourites);

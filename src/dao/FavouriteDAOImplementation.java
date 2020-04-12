@@ -6,24 +6,24 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
-import model.Favourites;
+import model.Favourite;
 
-public class FavouritesDAOImplementation implements FavouritesDAO{
-    private static  FavouritesDAOImplementation sfs = null;
+public class FavouriteDAOImplementation implements FavouriteDAO {
+    private static FavouriteDAOImplementation sfs = null;
 	
-	private FavouritesDAOImplementation() {
+	private FavouriteDAOImplementation() {
 		
 	}
 	
-	public static FavouritesDAOImplementation getInstance() {
+	public static FavouriteDAOImplementation getInstance() {
 		   if( null == sfs ) 
-		     sfs = new FavouritesDAOImplementation();
+		     sfs = new FavouriteDAOImplementation();
 		   return sfs;
 		  }
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void create (Favourites viaje) {
+	public void create (Favourite viaje) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.save(viaje);
@@ -33,10 +33,10 @@ public class FavouritesDAOImplementation implements FavouritesDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Favourites read (String email) {
+	public Favourite read (String email) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  Favourites usuario = session.get(Favourites.class, email);
+	  Favourite usuario = session.get(Favourite.class, email);
 	  session.getTransaction().commit();
 	  session.close();
 	  return usuario;
@@ -44,7 +44,7 @@ public class FavouritesDAOImplementation implements FavouritesDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void update (Favourites usuario) {
+	public void update (Favourite usuario) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.saveOrUpdate(usuario);
@@ -54,7 +54,7 @@ public class FavouritesDAOImplementation implements FavouritesDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void delete (Favourites viaje) {
+	public void delete (Favourite viaje) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.delete(viaje);
@@ -64,28 +64,43 @@ public class FavouritesDAOImplementation implements FavouritesDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Favourites> readAll () {
+	public List<Favourite> readAll () {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  List<Favourites> p = session.createQuery("from Favourites").list();
+	  List<Favourite> p = session.createQuery("from Favourite").list();
 	  session.getTransaction().commit();
 	  session.close();
 	  return p;
 	}
-	
+
+	@Override
+	public Favourite readById(String id) {
+		Session session = SessionFactoryService.get().openSession();
+		Favourite viaje = null;
+		session.beginTransaction();
+		Query q = session.createQuery("select p from Favourite p where p.id = :id");
+		q.setParameter("id", id);
+		List<Favourite> p = q.getResultList();
+		if(p.size()>0)
+			viaje = (Favourite) (q.getResultList().get(0));
+		session.getTransaction().commit();
+		session.close();
+		return viaje;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public Favourites login (String id, String origen, String destino) {
+	public Favourite login (String id, String origen, String destino) {
 	  Session session = SessionFactoryService.get().openSession();
-	  Favourites viaje = null;
+	  Favourite viaje = null;
 	  session.beginTransaction();
-	  Query q = session.createQuery("select p from Favourites p where p.id = :id and p.origen = :origen and p.destino = :destino");
+	  Query q = session.createQuery("select p from Favourite p where p.id = :id and p.origen = :origen and p.destino = :destino");
 	  q.setParameter("id", id);
 	  q.setParameter("origen", origen);
 	  q.setParameter("destino", destino);
-	  List<Favourites> tfgs = q.getResultList();
+	  List<Favourite> tfgs = q.getResultList();
 	  if (tfgs.size() > 0)
-	  	viaje = (Favourites) (q.getResultList().get(0));
+	  	viaje = (Favourite) (q.getResultList().get(0));
 	  session.getTransaction().commit();
 	  session.close();
 	  return viaje;

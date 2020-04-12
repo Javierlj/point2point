@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.FavouritesDAOImplementation;
-import model.Favourites;
+import dao.FavouriteDAOImplementation;
+import model.Favourite;
 import model.Usuario;
 
 /**
@@ -34,19 +34,16 @@ public class FormDeleteFavourite extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = req.getParameter("favid");
-		String origen = req.getParameter("favori");
-		String destino = req.getParameter("favdest");	
-		Favourites favorito = FavouritesDAOImplementation.getInstance().login(id,origen,destino);
+
+		Favourite favorito = FavouriteDAOImplementation.getInstance().readById(id);
 				
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		List<Favourites>favoritos = usuario.getViajes_fav();
+		List<Favourite> favoritos = usuario.getViajes_fav();
 		favoritos.remove(favorito);
-		FavouritesDAOImplementation.getInstance().delete(favorito);
-		usuario.setViajes_fav(favoritos);
-		
+		FavouriteDAOImplementation.getInstance().delete(favorito);
+
 		req.getSession().setAttribute("favourites", favoritos);
 		req.getSession().setAttribute("usuario", usuario);
-
 		
 		getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, resp);
 

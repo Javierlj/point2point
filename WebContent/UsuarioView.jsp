@@ -21,27 +21,27 @@
 <h2>Aquí el mapa</h2>
 
 <h2>Viajes favoritos</h2>
-<c:if test="${fn:length(favourites) != 0}">
-	<c:forEach items="${favourites}" var="favi">
-        <tr>
-		<td>${favi.id}</td>
-		<td>
-		<form action="FormDeleteFavourite">
-		<input type="hidden" name="favid" value="${favi.id}" />
-		<input type="hidden" name="favori" value="${favi.origen}" />
-		<input type="hidden" name="favdest" value="${favi.destino}" />
-		<button type="submit">Eliminar</button>
-		</form>
-		</td>
+<table border="1">
+	<c:if test="${fn:length(favourites) != 0}">
+		<th>Nombre</th><th>¿Quieres eliminarlo?</th>
+		<c:forEach items="${favourites}" var="favi">
+			<tr>
+				<td>${favi.id}</td>
+				<td>
+					<form action="FormDeleteFavourite">
+						<input type="hidden" name="favid" value="${favi.id}" />
+						<button type="submit">Eliminar</button>
+					</form>
+				</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	<c:if test="${fn:length(favourites) == 0}">
+		<tr>
+		<td>No has añadido viajes favoritos aún.</td>
 		</tr>
-	</c:forEach>
-</c:if>
-<c:if test="${fn:length(favourites) == 0}">
-	<tr>
-	<td>No has añadido viajes favoritos aún.</td>
-	</tr>
-</c:if>
-
+	</c:if>
+</table>
 
 <h2>Añade un nuevo viaje favorito</h2>
 <form action="Form3ViajeFav">

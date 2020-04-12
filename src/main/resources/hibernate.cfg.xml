@@ -15,7 +15,7 @@
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
 		<mapping class="model.Usuario" />
-		<mapping class="model.Favourites" />
+		<mapping class="model.Favourite" />
 		<mapping class="model.Historial" />
 		
 	</session-factory>

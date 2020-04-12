@@ -21,7 +21,7 @@ public class Usuario implements Serializable{
 
 	@OneToMany(mappedBy = "advisor", fetch = FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Favourites> Favourites;
+	private List<Favourite> Favourites;
 	
 	@OneToMany(mappedBy = "advisor", fetch = FetchType.EAGER)
 	private List<Historial> historial;
@@ -62,11 +62,11 @@ public class Usuario implements Serializable{
 		this.password = password;
 	}
 
-	public List<Favourites> getViajes_fav() {
+	public List<Favourite> getViajes_fav() {
 		return Favourites;
 	}
 
-	public void setViajes_fav(List<Favourites> viajes_fav) {
+	public void setViajes_fav(List<Favourite> viajes_fav) {
 		this.Favourites = viajes_fav;
 	}
 	
