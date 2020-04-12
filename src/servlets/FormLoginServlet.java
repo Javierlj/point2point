@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAOImplementation;
 import model.Usuario;
-import model.Viaje;
+import model.ViajeFav;
 
 @WebServlet("/FormLoginServlet")
 public class FormLoginServlet extends HttpServlet {
@@ -39,7 +39,7 @@ public class FormLoginServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/Admin.jsp").forward(req,resp);
 		} else if ( null != usuario ) {
 			req.getSession().setAttribute("usuario",UsuarioDAOImplementation.getInstance().read(usuario.getEmail()));
-			List<Viaje> viajes = usuario.getViajes_fav();
+			List<ViajeFav> viajes = usuario.getViajes_fav();
 			req.getSession().setAttribute("viajes", viajes);
 	        getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req,resp);
 		} else	{

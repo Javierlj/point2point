@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAOImplementation;
-import dao.ViajeDAOImplementation;
+import dao.ViajeFavDAOImplementation;
 import model.Usuario;
-import model.Viaje;
+import model.ViajeFav;
 
 /**
  * Servlet implementation class Form3ViajeFav
@@ -40,15 +40,15 @@ public class Form3ViajeFav extends HttpServlet {
 		String destino = req.getParameter("destino");
 
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		Viaje viaje = new Viaje();
+		ViajeFav viaje = new ViajeFav();
 		viaje.setId(id);
 		viaje.setOrigen(origen);
 		viaje.setDestino(destino);
 		viaje.setUsuario(usuario);
 
-		ViajeDAOImplementation.getInstance().create(viaje);
+		ViajeFavDAOImplementation.getInstance().create(viaje);
 
-		List<Viaje> viajes = (List<Viaje>) req.getSession().getAttribute("viajes");
+		List<ViajeFav> viajes = (List<ViajeFav>) req.getSession().getAttribute("viajes");
 		viajes.add(viaje);
 
 		req.getSession().setAttribute("viajes", viajes);
