@@ -24,7 +24,6 @@ public class FormPetitionServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	public FormPetitionServlet() throws MalformedURLException {
-		System.out.print("url");
 		final URL MobikeUrl = new URL("http://global-n-mobike-g.mobike.com/api/nearby/v4/nearbyBikeInfo");
 		final URL HiveUrl = new URL("https://hive.frontend.fleetbird.eu/api/prod/v1.06/map/cars");
 		urls = new URL[]{MobikeUrl, HiveUrl};
