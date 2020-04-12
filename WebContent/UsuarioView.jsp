@@ -12,13 +12,8 @@
 </head>
 <body>
 <h2>Hola ${usuario.nombre}</h2>
-<form action="Form2Viaje">
-	<input type="text" name="origen" placeholder="Origen">
-	<input type="text" name="destino" placeholder="Destino">
-	<button type="submit">Calcular</button>
-</form>
 
-<h2>Aquí el mapa</h2>
+<%@ include file = "MapView.jsp" %>
 
 <h2>Viajes favoritos</h2>
 <c:if test="${fn:length(usuario.viajes_fav) != 0}">
