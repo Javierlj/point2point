@@ -25,7 +25,14 @@
 	<c:forEach items="${favourites}" var="favi">
         <tr>
 		<td>${favi.id}</td>
-		<td></td>
+		<td>
+		<form action="FormDeleteFavourite">
+		<input type="hidden" name="favid" value="${favi.id}" />
+		<input type="hidden" name="favori" value="${favi.origen}" />
+		<input type="hidden" name="favdest" value="${favi.destino}" />
+		<button type="submit">Eliminar</button>
+		</form>
+		</td>
 		</tr>
 	</c:forEach>
 </c:if>
