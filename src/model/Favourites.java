@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class ViajeFav implements Serializable{
+public class Favourites implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class ViajeFav implements Serializable{
 	@ManyToOne
 	private Usuario advisor;
 
-	public ViajeFav() {
+	public Favourites() {
 		super();
 	}
 
@@ -43,7 +43,7 @@ public class ViajeFav implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ViajeFav other = (ViajeFav) obj;
+		Favourites other = (Favourites) obj;
 		if (advisor == null) {
 			if (other.advisor != null)
 				return false;

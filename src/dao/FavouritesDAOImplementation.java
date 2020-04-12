@@ -6,7 +6,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
-import model.ViajeFav;
+import model.Favourites;
 
 public class ViajeFavDAOImplementation implements ViajeFavDAO{
     private static  ViajeFavDAOImplementation sfs = null;
@@ -23,7 +23,7 @@ public class ViajeFavDAOImplementation implements ViajeFavDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void create (ViajeFav viaje) {
+	public void create (Favourites viaje) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.save(viaje);
@@ -33,10 +33,10 @@ public class ViajeFavDAOImplementation implements ViajeFavDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ViajeFav read (String email) {
+	public Favourites read (String email) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  ViajeFav usuario = session.get(ViajeFav.class, email);
+	  Favourites usuario = session.get(Favourites.class, email);
 	  session.getTransaction().commit();
 	  session.close();
 	  return usuario;
@@ -44,7 +44,7 @@ public class ViajeFavDAOImplementation implements ViajeFavDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void update (ViajeFav usuario) {
+	public void update (Favourites usuario) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.saveOrUpdate(usuario);
@@ -54,7 +54,7 @@ public class ViajeFavDAOImplementation implements ViajeFavDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void delete (ViajeFav viaje) {
+	public void delete (Favourites viaje) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.delete(viaje);
@@ -64,10 +64,10 @@ public class ViajeFavDAOImplementation implements ViajeFavDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ViajeFav> readAll () {
+	public List<Favourites> readAll () {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  List<ViajeFav> p = session.createQuery("from ViajeFav").list();
+	  List<Favourites> p = session.createQuery("from Favourites").list();
 	  session.getTransaction().commit();
 	  session.close();
 	  return p;
@@ -75,17 +75,17 @@ public class ViajeFavDAOImplementation implements ViajeFavDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ViajeFav login (String id, String origen, String destino) {
+	public Favourites login (String id, String origen, String destino) {
 	  Session session = SessionFactoryService.get().openSession();
-	  ViajeFav viaje = null;
+	  Favourites viaje = null;
 	  session.beginTransaction();
-	  Query q = session.createQuery("select p from ViajeFav p where p.id = :id and p.origen = :origen and p.destino = :destino");
+	  Query q = session.createQuery("select p from Favourites p where p.id = :id and p.origen = :origen and p.destino = :destino");
 	  q.setParameter("id", id);
 	  q.setParameter("origen", origen);
 	  q.setParameter("destino", destino);
-	  List<ViajeFav> tfgs = q.getResultList();
+	  List<Favourites> tfgs = q.getResultList();
 	  if (tfgs.size() > 0)
-	  	viaje = (ViajeFav) (q.getResultList().get(0));
+	  	viaje = (Favourites) (q.getResultList().get(0));
 	  session.getTransaction().commit();
 	  session.close();
 	  return viaje;

@@ -21,14 +21,14 @@
 <h2>Aquí el mapa</h2>
 
 <h2>Viajes favoritos</h2>
-<c:if test="${fn:length(viajes) != 0}">
-	<c:forEach items="${viajes}" var="favi">
-
-		<p>${favi.id}</p>
-
+<c:if test="${fn:length(favourites) != 0}">
+	<c:forEach items="${favourites}" var="favi">
+        <tr>
+		<td>${favi.id}</td>
+		</tr>
 	</c:forEach>
 </c:if>
-<c:if test="${fn:length(viajes) == 0}">
+<c:if test="${fn:length(favourites) == 0}">
 	<tr>
 	<td>No has añadido viajes favoritos aún.</td>
 	</tr>
