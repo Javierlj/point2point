@@ -25,6 +25,7 @@
 	<c:forEach items="${favourites}" var="favi">
         <tr>
 		<td>${favi.id}</td>
+		<td></td>
 		</tr>
 	</c:forEach>
 </c:if>

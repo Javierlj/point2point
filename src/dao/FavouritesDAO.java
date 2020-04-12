@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 import model.Favourites;
 
-public interface ViajeFavDAO {
+public interface FavouritesDAO {
 	public void create(Favourites viaje);
 	public Favourites read(String id);
 	public void update(Favourites viaje);

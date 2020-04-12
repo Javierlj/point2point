@@ -8,16 +8,16 @@ import org.hibernate.Session;
 
 import model.Favourites;
 
-public class ViajeFavDAOImplementation implements ViajeFavDAO{
-    private static  ViajeFavDAOImplementation sfs = null;
+public class FavouritesDAOImplementation implements FavouritesDAO{
+    private static  FavouritesDAOImplementation sfs = null;
 	
-	private ViajeFavDAOImplementation() {
+	private FavouritesDAOImplementation() {
 		
 	}
 	
-	public static ViajeFavDAOImplementation getInstance() {
+	public static FavouritesDAOImplementation getInstance() {
 		   if( null == sfs ) 
-		     sfs = new ViajeFavDAOImplementation();
+		     sfs = new FavouritesDAOImplementation();
 		   return sfs;
 		  }
 	

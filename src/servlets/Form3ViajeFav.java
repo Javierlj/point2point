@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAOImplementation;
-import dao.ViajeFavDAOImplementation;
+import dao.FavouritesDAOImplementation;
 import model.Usuario;
 import model.Favourites;
 
@@ -46,7 +46,7 @@ public class Form3ViajeFav extends HttpServlet {
 		favourite.setDestino(destino);
 		favourite.setUsuario(usuario);
 
-		ViajeFavDAOImplementation.getInstance().create(favourite);
+		FavouritesDAOImplementation.getInstance().create(favourite);
 
 		List<Favourites> favourites = (List<Favourites>) req.getSession().getAttribute("favourites");
 		favourites.add(favourite);
