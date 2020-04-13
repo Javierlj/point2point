@@ -9,7 +9,9 @@ public class Historial implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private int id;
 	private String origen;
 	private String destino;
 	private Date date;
@@ -25,12 +27,12 @@ public class Historial implements Serializable{
 	}
 
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -93,59 +95,20 @@ public class Historial implements Serializable{
 
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((advisor == null) ? 0 : advisor.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(cost);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((origen == null) ? 0 : origen.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Historial historial = (Historial) o;
+		return id == historial.id &&
+				Double.compare(historial.cost, cost) == 0 &&
+				origen.equals(historial.origen) &&
+				destino.equals(historial.destino) &&
+				date.equals(historial.date) &&
+				advisor.equals(historial.advisor);
 	}
-
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Historial other = (Historial) obj;
-		if (advisor == null) {
-			if (other.advisor != null)
-				return false;
-		} else if (!advisor.equals(other.advisor))
-			return false;
-		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (destino == null) {
-			if (other.destino != null)
-				return false;
-		} else if (!destino.equals(other.destino))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (origen == null) {
-			if (other.origen != null)
-				return false;
-		} else if (!origen.equals(other.origen))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(id, origen, destino, date, cost, advisor);
 	}
-	
-	
 }
