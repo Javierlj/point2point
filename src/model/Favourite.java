@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Viaje implements Serializable{
+public class Favourite implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,20 +16,24 @@ public class Viaje implements Serializable{
 	@ManyToOne
 	private Usuario advisor;
 
-	public Viaje() {
+	public Favourite() {
 		super();
 	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((advisor == null) ? 0 : advisor.hashCode());
 		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((origen == null) ? 0 : origen.hashCode());
-		result = prime * result + ((advisor == null) ? 0 : advisor.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -39,7 +43,12 @@ public class Viaje implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Viaje other = (Viaje) obj;
+		Favourite other = (Favourite) obj;
+		if (advisor == null) {
+			if (other.advisor != null)
+				return false;
+		} else if (!advisor.equals(other.advisor))
+			return false;
 		if (destino == null) {
 			if (other.destino != null)
 				return false;
@@ -55,17 +64,14 @@ public class Viaje implements Serializable{
 				return false;
 		} else if (!origen.equals(other.origen))
 			return false;
-		if (advisor == null) {
-			if (other.advisor != null)
-				return false;
-		} else if (!advisor.equals(other.advisor))
-			return false;
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Viaje [id=" + id + ", origen=" + origen + ", destino=" + destino + ", advisor=" + advisor + "]";
+		return "ViajeFav [id=" + id + ", origen=" + origen + ", destino=" + destino + ", advisor=" + advisor + "]";
 	}
 
 	public String getId() {

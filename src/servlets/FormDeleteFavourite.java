@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.FavouriteDAOImplementation;
-import model.Usuario;
 import model.Favourite;
+import model.Usuario;
 
 /**
- * Servlet implementation class Form3ViajeFav
+ * Servlet implementation class FormDeleteFavourite
  */
-@WebServlet("/Form3ViajeFav")
-public class Form3ViajeFav extends HttpServlet {
+@WebServlet("/FormDeleteFavourite")
+public class FormDeleteFavourite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Form3ViajeFav() {
+    public FormDeleteFavourite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +33,20 @@ public class Form3ViajeFav extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = req.getParameter("id");
-		String origen = req.getParameter("origen");
-		String destino = req.getParameter("destino");
+		String id = req.getParameter("favid");
 
+		Favourite favorito = FavouriteDAOImplementation.getInstance().readById(id);
+				
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		Favourite favourite = new Favourite();
-		favourite.setId(id);
-		favourite.setOrigen(origen);
-		favourite.setDestino(destino);
-		favourite.setUsuario(usuario);
+		List<Favourite> favoritos = usuario.getViajes_fav();
+		favoritos.remove(favorito);
+		FavouriteDAOImplementation.getInstance().delete(favorito);
 
-		FavouriteDAOImplementation.getInstance().create(favourite);
-
-		List<Favourite> favourites = (List<Favourite>) req.getSession().getAttribute("favourites");
-		favourites.add(favourite);
-
-		req.getSession().setAttribute("favourites", favourites);
+		req.getSession().setAttribute("favourites", favoritos);
 		req.getSession().setAttribute("usuario", usuario);
+		
 		getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, resp);
+
 	}
 
 	/**

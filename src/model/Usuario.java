@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 @Entity
 public class Usuario implements Serializable{
@@ -16,8 +19,12 @@ public class Usuario implements Serializable{
 	private String last_name;
 	private String password;
 
+	@OneToMany(mappedBy = "advisor", fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Favourite> Favourites;
+	
 	@OneToMany(mappedBy = "advisor", fetch = FetchType.EAGER)
-	private List<Viaje> viajes_fav;
+	private List<Historial> historial;
 	
 	public Usuario() {
 		super();
@@ -55,12 +62,20 @@ public class Usuario implements Serializable{
 		this.password = password;
 	}
 
-	public List<Viaje> getViajes_fav() {
-		return viajes_fav;
+	public List<Favourite> getViajes_fav() {
+		return Favourites;
 	}
 
-	public void setViajes_fav(List<Viaje> viajes_fav) {
-		this.viajes_fav = viajes_fav;
+	public void setViajes_fav(List<Favourite> viajes_fav) {
+		this.Favourites = viajes_fav;
+	}
+	
+	public List<Historial> getHistorial() {
+		return historial;
+	}
+
+	public void setHistorial(List<Historial> viajes_fav) {
+		this.historial = viajes_fav;
 	}
 
     @Override
@@ -71,7 +86,8 @@ public class Usuario implements Serializable{
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((viajes_fav == null) ? 0 : viajes_fav.hashCode());
+        result = prime * result + ((Favourites == null) ? 0 : Favourites.hashCode());
+        result = prime * result + ((historial == null) ? 0 : historial.hashCode());
         return result;
     }
 
@@ -104,10 +120,15 @@ public class Usuario implements Serializable{
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (viajes_fav == null) {
-            if (other.viajes_fav != null)
+        if (Favourites == null) {
+            if (other.Favourites != null)
                 return false;
-        } else if (!viajes_fav.equals(other.viajes_fav))
+        } else if (!Favourites.equals(other.Favourites))
+            return false;
+        if (historial == null) {
+            if (other.historial != null)
+                return false;
+        } else if (!historial.equals(other.historial))
             return false;
         return true;
     }
@@ -115,7 +136,7 @@ public class Usuario implements Serializable{
     @Override
     public String toString() {
         return "Usuario [email=" + email + ", nombre=" + name + ", apellidos=" + last_name + ", contrase�a="
-                + password + ", viajes_fav=" + viajes_fav + "]";
+                + password + ", Favourites=" + Favourites + ", historial=" + historial + "]";
     }
 
 }
