@@ -6,24 +6,24 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
-import model.Viaje;
+import model.Favourite;
 
-public class ViajeDAOImplementation implements ViajeDAO{
-private static  ViajeDAOImplementation sfs = null;
+public class FavouriteDAOImplementation implements FavouriteDAO {
+    private static FavouriteDAOImplementation sfs = null;
 	
-	private ViajeDAOImplementation() {
+	private FavouriteDAOImplementation() {
 		
 	}
 	
-	public static ViajeDAOImplementation getInstance() {
+	public static FavouriteDAOImplementation getInstance() {
 		   if( null == sfs ) 
-		     sfs = new ViajeDAOImplementation();
+		     sfs = new FavouriteDAOImplementation();
 		   return sfs;
 		  }
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void create (Viaje viaje) {
+	public void create (Favourite viaje) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.save(viaje);
@@ -33,10 +33,10 @@ private static  ViajeDAOImplementation sfs = null;
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Viaje read (String email) {
+	public Favourite read (String email) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  Viaje usuario = session.get(Viaje.class, email);
+	  Favourite usuario = session.get(Favourite.class, email);
 	  session.getTransaction().commit();
 	  session.close();
 	  return usuario;
@@ -44,7 +44,7 @@ private static  ViajeDAOImplementation sfs = null;
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void update (Viaje usuario) {
+	public void update (Favourite usuario) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
 	  session.saveOrUpdate(usuario);
@@ -54,38 +54,53 @@ private static  ViajeDAOImplementation sfs = null;
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void delete (Viaje usuario) {
+	public void delete (Favourite viaje) {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  session.delete(usuario);
+	  session.delete(viaje);
 	  session.getTransaction().commit();
 	  session.close();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Viaje> readAll () {
+	public List<Favourite> readAll () {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  List<Viaje> p = session.createQuery("from Viaje").list();
+	  List<Favourite> p = session.createQuery("from Favourite").list();
 	  session.getTransaction().commit();
 	  session.close();
 	  return p;
 	}
-	
+
+	@Override
+	public Favourite readById(String id) {
+		Session session = SessionFactoryService.get().openSession();
+		Favourite viaje = null;
+		session.beginTransaction();
+		Query q = session.createQuery("select p from Favourite p where p.id = :id");
+		q.setParameter("id", id);
+		List<Favourite> p = q.getResultList();
+		if(p.size()>0)
+			viaje = (Favourite) (q.getResultList().get(0));
+		session.getTransaction().commit();
+		session.close();
+		return viaje;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public Viaje login (String id, String origen, String destino) {
+	public Favourite login (String id, String origen, String destino) {
 	  Session session = SessionFactoryService.get().openSession();
-	  Viaje viaje = null;
+	  Favourite viaje = null;
 	  session.beginTransaction();
-	  Query q = session.createQuery("select p from Usuario p where p.id = :id and p.origen = :origen and p.destino = :destino");
+	  Query q = session.createQuery("select p from Favourite p where p.id = :id and p.origen = :origen and p.destino = :destino");
 	  q.setParameter("id", id);
 	  q.setParameter("origen", origen);
 	  q.setParameter("destino", destino);
-	  List<Viaje> tfgs = q.getResultList();
+	  List<Favourite> tfgs = q.getResultList();
 	  if (tfgs.size() > 0)
-	  	viaje = (Viaje) (q.getResultList().get(0));
+	  	viaje = (Favourite) (q.getResultList().get(0));
 	  session.getTransaction().commit();
 	  session.close();
 	  return viaje;

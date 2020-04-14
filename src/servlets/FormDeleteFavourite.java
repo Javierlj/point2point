@@ -1,28 +1,29 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsuarioDAOImplementation;
+import dao.FavouriteDAOImplementation;
+import model.Favourite;
 import model.Usuario;
 
-
-
 /**
- * Servlet implementation class Form1NuevoUsuario
+ * Servlet implementation class FormDeleteFavourite
  */
-@WebServlet("/Form1UsuarioServlet")
-public class Form1UsuarioServlet extends HttpServlet {
+@WebServlet("/FormDeleteFavourite")
+public class FormDeleteFavourite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Form1UsuarioServlet() {
+    public FormDeleteFavourite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +33,20 @@ public class Form1UsuarioServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
-		String name = req.getParameter("name");
-		String apellidos = req.getParameter("apellidos");
-		//Professor advisor = ProfessorDAOImplementation.getInstance().read(advisorEmail);
-		Usuario usuario = new Usuario();
-		usuario.setEmail(email);
-		usuario.setPassword(password);
-		usuario.setName(name);
-		usuario.setLast_name(apellidos);
-		UsuarioDAOImplementation.getInstance().create(usuario);
-		req.getSession().setAttribute("usuario", usuario);	
-		getServletContext().getRequestDispatcher("/index.html").forward(req, resp);
+		String id = req.getParameter("favid");
+
+		Favourite favorito = FavouriteDAOImplementation.getInstance().readById(id);
+				
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
+		List<Favourite> favoritos = usuario.getViajes_fav();
+		favoritos.remove(favorito);
+		FavouriteDAOImplementation.getInstance().delete(favorito);
+
+		req.getSession().setAttribute("favourites", favoritos);
+		req.getSession().setAttribute("usuario", usuario);
+		
+		getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, resp);
+
 	}
 
 	/**
