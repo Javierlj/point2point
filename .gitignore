@@ -5,3 +5,7 @@
 .Point2point.iml
 .DS_Store
 /target/
+
+/.settings
+.classpath
+.project

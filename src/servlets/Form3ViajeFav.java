@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsuarioDAOImplementation;
+import dao.FavouriteDAOImplementation;
 import model.Usuario;
-import model.Viaje;
+import model.Favourite;
 
 /**
  * Servlet implementation class Form3ViajeFav
@@ -36,17 +36,20 @@ public class Form3ViajeFav extends HttpServlet {
 		String id = req.getParameter("id");
 		String origen = req.getParameter("origen");
 		String destino = req.getParameter("destino");
+
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		List<Viaje> viajes = usuario.getViajes_fav();
-		//Professor advisor = ProfessorDAOImplementation.getInstance().read(advisorEmail);
-		Viaje viaje= new Viaje();
-		viaje.setId(id);
-		viaje.setOrigen(origen);
-		viaje.setDestino(destino);
-		viaje.setUsuario(usuario);
-		viajes.add(viaje);
-		usuario.setViajes_fav(viajes);
-		UsuarioDAOImplementation.getInstance().update(usuario);
+		Favourite favourite = new Favourite();
+		favourite.setId(id);
+		favourite.setOrigen(origen);
+		favourite.setDestino(destino);
+		favourite.setUsuario(usuario);
+
+		FavouriteDAOImplementation.getInstance().create(favourite);
+
+		List<Favourite> favourites = (List<Favourite>) req.getSession().getAttribute("favourites");
+		favourites.add(favourite);
+
+		req.getSession().setAttribute("favourites", favourites);
 		req.getSession().setAttribute("usuario", usuario);
 		getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, resp);
 	}
