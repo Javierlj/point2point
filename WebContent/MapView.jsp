@@ -10,11 +10,10 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
 
 
-<div class="container">
-    <form>
+<div class="container-fluid p-0">
+    <form class="justify-content-center">
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -32,12 +31,6 @@
                         <button type="submit" class="btn btn-primary">Calcular</button>
                     </div>
                 </div>
-
-
-
-
-
-
             </div>
     </form>
     <div id="googleMap" style="width:100%;height:500px;"></div>
@@ -64,9 +57,20 @@
             marker.setMap(map);
         });
 
-
-
     }
+
+    /*window.eqfeed_callback = function(results) {
+        for (var i = 0; i < results.features.length; i++) {
+            var coords = results.features[i].geometry.coordinates;
+            var latLng = new google.maps.LatLng(coords[1],coords[0]);
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+        }
+    }*/
+
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3mRMEq45bXCYnUyK90ZI1BEe2k20zYpc&callback=myMap"></script>
 <!-- Optional JavaScript -->
@@ -74,4 +78,5 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -11,8 +11,12 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-<h2>Hola ${usuario.name}</h2>
-
+<div class="container-fluid p-0">
+	<div class="jumbotron">
+		<h1>Hola ${usuario.name}!</h1>
+		<h2>Donde quieres ir hoy?</h2>
+	</div>
+</div>
 <%@ include file = "MapView.jsp" %>
 
 <h2>Viajes favoritos</h2>
