@@ -12,10 +12,8 @@
 </head>
 <body>
 <div class="container-fluid p-0">
-	<div class="jumbotron">
 		<h1>Hola ${usuario.name}!</h1>
 		<h2>Donde quieres ir hoy?</h2>
-	</div>
 </div>
 <%@ include file = "MapView.jsp" %>
 
