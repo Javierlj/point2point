@@ -1,5 +1,6 @@
 package servlets;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,16 +33,17 @@ public class FormPetitionServlet extends HttpServlet{
 	private URL[] urls;	
 
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
 	
 		try {
 			String latitude = req.getParameter("latitude");
 			String longitude = req.getParameter("longitude");
 			String radio = req.getParameter("radio");
-			String mobikeParameters="latitude="+latitude+"&longitude="+longitude+"&scope="+radio; 
+			String mobikeParameters="latitude="+latitude+"&longitude="+longitude+"&scope="+radio;
 			String HiveParameters="latitude="+latitude+"&longitude="+longitude;
 			String[] companiesNames = {"Mobike","Hive"};
-			String[] parameters = new String[] {mobikeParameters,HiveParameters}; 
+			String[] parameters = new String[] {mobikeParameters,HiveParameters};
+
 			for(int i = 0 ; i<urls.length;i++) {
 				URL serviceUrl = urls[i];
 				String urlParameters = parameters[i];
@@ -68,13 +70,16 @@ public class FormPetitionServlet extends HttpServlet{
 			    try {
 					JSONObject obj = new JSONObject(response);
 					System.out.println(response);
-					req.getSession().setAttribute(companiesNames[i], obj);
+					resp.setContentType("application/json");  // Set content type of the response so that jQuery knows what it can expect.
+					resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+					resp.getWriter().print(obj);
+
 				} catch (JSONException e) {
 					  System.out.println("Bad json");
 				}
 			
 			}
-			
+
 			//Redireccion
 			//resp.sendRedirect(req.getContextPath() + "/ServletName"); 
 
