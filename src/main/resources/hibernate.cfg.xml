@@ -17,6 +17,7 @@
 		<mapping class="model.Usuario" />
 		<mapping class="model.Favourite" />
 		<mapping class="model.Historial" />
+		<mapping class="model.ServiceProvider" />
 		
 	</session-factory>
 </hibernate-configuration>
