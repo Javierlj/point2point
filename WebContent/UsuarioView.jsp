@@ -16,6 +16,7 @@
 		<h2>Donde quieres ir hoy?</h2>
 </div>
 <%@ include file = "MapView.jsp" %>
+<<<<<<< HEAD
 
 <h2>Viajes favoritos</h2>
 <table border="1">
