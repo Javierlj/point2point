@@ -53,6 +53,8 @@
 
     var map;
 
+    var directionsService, directionsRenderer
+
     var placeSearch, autocomplete;
 
     var place1,place2;
@@ -96,6 +98,11 @@
                 zoom:15,
             };
             map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            directionsService = new google.maps.DirectionsService;
+            directionsRenderer = new google.maps.DirectionsRenderer;
+
+            directionsRenderer.setMap(map);
 
             google.maps.event.addListener(map, 'zoom_changed', function() {
                 zoomChangeBoundsListener =
@@ -193,6 +200,19 @@
         //option A
         $("form").submit(function(e){
             e.preventDefault();
+            directionsService.route({
+                origin: new google.maps.LatLng(lat1,long1),
+                destination: new google.maps.LatLng(lat2,long2),
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
         });
 
 
