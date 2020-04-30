@@ -29,15 +29,10 @@ public class FormPetitionServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	public FormPetitionServlet() throws MalformedURLException {
-		final URL MobikeUrl = new URL("http://global-n-mobike-g.mobike.com/api/nearby/v4/nearbyBikeInfo");
-		final URL HiveUrl = new URL("https://hive.frontend.fleetbird.eu/api/prod/v1.06/map/cars");
-		urls = new URL[]{MobikeUrl, HiveUrl};
+	public FormPetitionServlet() {
+	
 	}
-	
-	private URL[] urls;	
 
-	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
 		/*
 		ServiceProvider provider = new ServiceProvider();
@@ -48,24 +43,31 @@ public class FormPetitionServlet extends HttpServlet{
 		provider.setToken("");
 		ServiceProviderDAOImplementaion.getInstance().create(provider);
 		
+		ServiceProvider provider2 = new ServiceProvider();
+		provider2.setName("Hive");
+		provider2.setUrl("https://hive.frontend.fleetbird.eu/api/prod/v1.06/map/cars");
+		provider2.setActive(false);
+		provider2.setScopeNeeded(false);
+		provider2.setToken("");
+		ServiceProviderDAOImplementaion.getInstance().create(provider);
 		
 		*/
 		List<ServiceProvider> providers = ServiceProviderDAOImplementaion.getInstance().readAll();
 		System.out.println(providers);
 
 		try {
-			for(int i = 0 ; i<providers.size();i++) {
+			for(int i = 0 ; i<providers.size();i++) {  //Iteracion sobre la lista de proveedores
 				ServiceProvider actualProvider = providers.get(i);
-				if(actualProvider.getActive()){
-					String latitude = req.getParameter("latitude");
+				if(actualProvider.getActive()){  //Si no hemos desactivado el proveedor
+					String latitude = req.getParameter("latitude"); //Recuperamos parametros de la peticion
 					String longitude = req.getParameter("longitude");
 					String radio = req.getParameter("radio");
 					URL serviceUrl = new URL(actualProvider.getUrl());
 					String urlParameters="latitude="+latitude+"&longitude="+longitude;
-					if(actualProvider.getScopeNeeded()) {
+					if(actualProvider.getScopeNeeded()) { //Si es necesario adjuntar un scope a la peticion
 						urlParameters = urlParameters+ "&scope="+radio;
 					}
-					HttpURLConnection myURLConnection = (HttpURLConnection)serviceUrl.openConnection();
+					HttpURLConnection myURLConnection = (HttpURLConnection)serviceUrl.openConnection(); //Conexion a la api
 					byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 					int    postDataLength = postData.length;
 					myURLConnection.setRequestMethod("POST");

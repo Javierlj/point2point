@@ -9,11 +9,11 @@ public class ServiceProvider implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String name;
-	private String url;
- 	private String token;
- 	private Boolean active;
- 	private Boolean scopeNeeded;
+	private String name; //Nombre del servicios
+	private String url; //Url del recurso
+ 	private String token; //Token para la autenticacion, puede ser nulo
+ 	private Boolean active; //Servicio activo en nuestra aplicacion
+ 	private Boolean scopeNeeded; //Es necesarioa adjuntar parametro scope a la peticion
  	
  	
  	public String getName() {
