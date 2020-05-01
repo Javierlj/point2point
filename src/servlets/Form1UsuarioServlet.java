@@ -36,7 +36,6 @@ public class Form1UsuarioServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		String name = req.getParameter("name");
 		String apellidos = req.getParameter("apellidos");
-		//Professor advisor = ProfessorDAOImplementation.getInstance().read(advisorEmail);
 		Usuario usuario = new Usuario();
 		usuario.setEmail(email);
 		usuario.setPassword(password);
