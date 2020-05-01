@@ -45,6 +45,6 @@ public class Form4Historial extends HttpServlet {
 
         req.getSession().setAttribute("historial", historialList);
 
-        getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher("/MainView.jsp").forward(req, res);
     }
 }

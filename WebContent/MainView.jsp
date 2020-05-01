@@ -11,10 +11,16 @@
 <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-<div class="container-fluid p-0">
+<div class="container-fluid p-0" style="display: flex ; flex-direction: column">
+	<div>
 		<h1>Hola ${usuario.name}!</h1>
 		<h2>Donde quieres ir hoy?</h2>
+	</div>
+	<div>
+		<a href="UserView.jsp">User</a>
+	</div>
 </div>
+
 <%@ include file = "MapView.jsp" %>
 </body>
 </html>

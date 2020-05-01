@@ -44,7 +44,7 @@ public class FormLoginServlet extends HttpServlet {
 			req.getSession().setAttribute("favourites", favourites);
 			List<Historial> historial = usuario.getHistorial();
 			req.getSession().setAttribute("historial", historial);
-			getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req,resp);
+			getServletContext().getRequestDispatcher("/MainView.jsp").forward(req,resp);
 		} else	{
 	        getServletContext().getRequestDispatcher("/index.html").forward(req,resp);
 		}
