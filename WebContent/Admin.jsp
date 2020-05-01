@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
@@ -11,7 +10,7 @@
 </head>
 <body>
 <h2>Admin</h2>
-<p><b>Número de usuarios activos: </b>${fn:length(usuarios)}</p>
+<p><b>NÃºmero de usuarios activos: </b>${fn:length(usuarios)}</p>
 <h2>Usuarios</h2>
 <table border="1">
 <c:forEach items="${usuarios}" var="usuarioi">

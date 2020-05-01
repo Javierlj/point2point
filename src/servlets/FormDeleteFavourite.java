@@ -45,7 +45,7 @@ public class FormDeleteFavourite extends HttpServlet {
 		req.getSession().setAttribute("favourites", favoritos);
 		req.getSession().setAttribute("usuario", usuario);
 		
-		getServletContext().getRequestDispatcher("/MainView.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/UserView.jsp").forward(req, resp);
 
 	}
 

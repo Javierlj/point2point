@@ -51,7 +51,7 @@ public class Form3ViajeFav extends HttpServlet {
 
 		req.getSession().setAttribute("favourites", favourites);
 		req.getSession().setAttribute("usuario", usuario);
-		getServletContext().getRequestDispatcher("/MainView.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/UserView.jsp").forward(req, resp);
 	}
 
 	/**
