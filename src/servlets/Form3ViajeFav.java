@@ -33,13 +33,13 @@ public class Form3ViajeFav extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = req.getParameter("id");
+		String name = req.getParameter("name");
 		String origen = req.getParameter("origen");
 		String destino = req.getParameter("destino");
 
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		Favourite favourite = new Favourite();
-		favourite.setId(id);
+		favourite.setName(name);
 		favourite.setOrigen(origen);
 		favourite.setDestino(destino);
 		favourite.setUsuario(usuario);

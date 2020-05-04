@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Favourite implements Serializable{
@@ -9,7 +10,10 @@ public class Favourite implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private String id;
+	private String name;
 	private String origen;
 	private String destino;
 
@@ -21,57 +25,32 @@ public class Favourite implements Serializable{
 	}
 
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Favourite favourite = (Favourite) o;
+		return Objects.equals(id, favourite.id) &&
+				Objects.equals(name, favourite.name) &&
+				Objects.equals(origen, favourite.origen) &&
+				Objects.equals(destino, favourite.destino) &&
+				Objects.equals(advisor, favourite.advisor);
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((advisor == null) ? 0 : advisor.hashCode());
-		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((origen == null) ? 0 : origen.hashCode());
-		return result;
+		return Objects.hash(id, name, origen, destino, advisor);
 	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Favourite other = (Favourite) obj;
-		if (advisor == null) {
-			if (other.advisor != null)
-				return false;
-		} else if (!advisor.equals(other.advisor))
-			return false;
-		if (destino == null) {
-			if (other.destino != null)
-				return false;
-		} else if (!destino.equals(other.destino))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (origen == null) {
-			if (other.origen != null)
-				return false;
-		} else if (!origen.equals(other.origen))
-			return false;
-		return true;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "ViajeFav [id=" + id + ", origen=" + origen + ", destino=" + destino + ", advisor=" + advisor + "]";
+		return "Favourite{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", origen='" + origen + '\'' +
+				", destino='" + destino + '\'' +
+				", advisor=" + advisor +
+				'}';
 	}
 
 	public String getId() {
@@ -80,6 +59,14 @@ public class Favourite implements Serializable{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getOrigen() {
