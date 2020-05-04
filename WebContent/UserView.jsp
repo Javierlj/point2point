@@ -22,7 +22,7 @@
         <th>Nombre</th><th>¿Quieres eliminarlo?</th>
         <c:forEach items="${favourites}" var="favi">
             <tr>
-                <td>${favi.id}</td>
+                <td>${favi.name}</td>
                 <td>
                     <form action="FormDeleteFavourite">
                         <input type="hidden" name="favid" value="${favi.id}" />
@@ -41,7 +41,7 @@
 
 <h2>Añade un nuevo viaje favorito</h2>
 <form action="Form3ViajeFav">
-    <input type="text" name="id" placeholder="Identificador del viaje">
+    <input type="text" name="name" placeholder="Nombre del favorito">
     <input type="text" name="origen" placeholder="Origen">
     <input type="text" name="destino" placeholder="Destino">
     <button type="submit">Añadir</button>
