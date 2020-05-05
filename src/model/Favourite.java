@@ -14,8 +14,10 @@ public class Favourite implements Serializable{
 	@Column(name = "id", updatable = false, nullable = false)
 	private String id;
 	private String name;
-	private String origen;
-	private String destino;
+	private float origin_lat;
+	private float origin_long;
+	private float destiny_lat;
+	private float destiny_long;
 
 	@ManyToOne
 	private Usuario advisor;
@@ -30,16 +32,18 @@ public class Favourite implements Serializable{
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Favourite favourite = (Favourite) o;
-		return Objects.equals(id, favourite.id) &&
-				Objects.equals(name, favourite.name) &&
-				Objects.equals(origen, favourite.origen) &&
-				Objects.equals(destino, favourite.destino) &&
-				Objects.equals(advisor, favourite.advisor);
+		return Float.compare(favourite.origin_lat, origin_lat) == 0 &&
+				Float.compare(favourite.origin_long, origin_long) == 0 &&
+				Float.compare(favourite.destiny_lat, destiny_lat) == 0 &&
+				Float.compare(favourite.destiny_long, destiny_long) == 0 &&
+				Objects.equals(id, favourite.id) &&
+				name.equals(favourite.name) &&
+				advisor.equals(favourite.advisor);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, origen, destino, advisor);
+		return Objects.hash(id, name, origin_lat, origin_long, destiny_lat, destiny_long, advisor);
 	}
 
 	@Override
@@ -47,8 +51,10 @@ public class Favourite implements Serializable{
 		return "Favourite{" +
 				"id='" + id + '\'' +
 				", name='" + name + '\'' +
-				", origen='" + origen + '\'' +
-				", destino='" + destino + '\'' +
+				", origin_lat=" + origin_lat +
+				", origin_long=" + origin_long +
+				", destiny_lat=" + destiny_lat +
+				", getDestiny_long=" + destiny_long +
 				", advisor=" + advisor +
 				'}';
 	}
@@ -69,20 +75,36 @@ public class Favourite implements Serializable{
 		this.name = name;
 	}
 
-	public String getOrigen() {
-		return origen;
+	public float getOrigin_lat() {
+		return origin_lat;
 	}
 
-	public void setOrigen(String origen) {
-		this.origen = origen;
+	public void setOrigin_lat(float origin_lat) {
+		this.origin_lat = origin_lat;
 	}
 
-	public String getDestino() {
-		return destino;
+	public float getOrigin_long() {
+		return origin_long;
 	}
 
-	public void setDestino(String destino) {
-		this.destino = destino;
+	public void setOrigin_long(float origin_long) {
+		this.origin_long = origin_long;
+	}
+
+	public float getDestiny_lat() {
+		return destiny_lat;
+	}
+
+	public void setDestiny_lat(float destiny_lat) {
+		this.destiny_lat = destiny_lat;
+	}
+
+	public float getGetDestiny_long() {
+		return destiny_long;
+	}
+
+	public void setGetDestiny_long(float getDestiny_long) {
+		this.destiny_long = getDestiny_long;
 	}
 
 	public Usuario getAdvisor() {
