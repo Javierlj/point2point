@@ -34,14 +34,18 @@ public class Form3ViajeFav extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = req.getParameter("name");
-		String origen = req.getParameter("origen");
-		String destino = req.getParameter("destino");
+		float origin_lat = Float.parseFloat(req.getParameter("origin_lat"));
+		float origin_long = Float.parseFloat(req.getParameter("origin_long"));
+		float destiny_lat = Float.parseFloat(req.getParameter("destiny_lat"));
+		float destiny_long = Float.parseFloat(req.getParameter("destiny_long"));
 
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		Favourite favourite = new Favourite();
 		favourite.setName(name);
-		favourite.setOrigen(origen);
-		favourite.setDestino(destino);
+		favourite.setOrigin_lat(origin_lat);
+		favourite.setOrigin_long(origin_long);
+		favourite.setDestiny_lat(destiny_lat);
+		favourite.setDestiny_long(destiny_long);
 		favourite.setUsuario(usuario);
 
 		FavouriteDAOImplementation.getInstance().create(favourite);

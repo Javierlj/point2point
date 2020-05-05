@@ -103,8 +103,8 @@ public class Favourite implements Serializable{
 		return destiny_long;
 	}
 
-	public void setGetDestiny_long(float getDestiny_long) {
-		this.destiny_long = getDestiny_long;
+	public void setDestiny_long(float destiny_long) {
+		this.destiny_long = destiny_long;
 	}
 
 	public Usuario getAdvisor() {
