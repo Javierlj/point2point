@@ -12,8 +12,10 @@ public class Historial implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
-	private String origen;
-	private String destino;
+	private float origin_lat;
+	private float origin_long;
+	private float destiny_lat;
+	private float destiny_long;
 	private Date date;
 	private double cost;
 	
@@ -36,26 +38,37 @@ public class Historial implements Serializable{
 		this.id = id;
 	}
 
-
-	public String getOrigen() {
-		return origen;
+	public float getOrigin_lat() {
+		return origin_lat;
 	}
 
-
-	public void setOrigen(String origen) {
-		this.origen = origen;
+	public void setOrigin_lat(float origin_lat) {
+		this.origin_lat = origin_lat;
 	}
 
-
-	public String getDestino() {
-		return destino;
+	public float getOrigin_long() {
+		return origin_long;
 	}
 
-
-	public void setDestino(String destino) {
-		this.destino = destino;
+	public void setOrigin_long(float origin_long) {
+		this.origin_long = origin_long;
 	}
 
+	public float getDestiny_lat() {
+		return destiny_lat;
+	}
+
+	public void setDestiny_lat(float destiny_lat) {
+		this.destiny_lat = destiny_lat;
+	}
+
+	public float getDestiny_long() {
+		return destiny_long;
+	}
+
+	public void setDestiny_long(float destiny_long) {
+		this.destiny_long = destiny_long;
+	}
 
 	public Date getDate() {
 		return date;
@@ -86,13 +99,19 @@ public class Historial implements Serializable{
 		this.advisor = advisor;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Historial [id=" + id + ", origen=" + origen + ", destino=" + destino + ", date=" + date + ", cost="
-				+ cost + ", advisor=" + advisor + "]";
+		return "Historial{" +
+				"id=" + id +
+				", origin_lat=" + origin_lat +
+				", origin_long=" + origin_long +
+				", destiny_lat=" + destiny_lat +
+				", destiny_long=" + destiny_long +
+				", date=" + date +
+				", cost=" + cost +
+				", advisor=" + advisor +
+				'}';
 	}
-
 
 	@Override
 	public boolean equals(Object o) {
@@ -100,15 +119,17 @@ public class Historial implements Serializable{
 		if (o == null || getClass() != o.getClass()) return false;
 		Historial historial = (Historial) o;
 		return id == historial.id &&
+				Float.compare(historial.origin_lat, origin_lat) == 0 &&
+				Float.compare(historial.origin_long, origin_long) == 0 &&
+				Float.compare(historial.destiny_lat, destiny_lat) == 0 &&
+				Float.compare(historial.destiny_long, destiny_long) == 0 &&
 				Double.compare(historial.cost, cost) == 0 &&
-				origen.equals(historial.origen) &&
-				destino.equals(historial.destino) &&
-				date.equals(historial.date) &&
-				advisor.equals(historial.advisor);
+				Objects.equals(date, historial.date) &&
+				Objects.equals(advisor, historial.advisor);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, origen, destino, date, cost, advisor);
+		return Objects.hash(id, origin_lat, origin_long, destiny_lat, destiny_long, date, cost, advisor);
 	}
 }
