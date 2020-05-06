@@ -25,15 +25,19 @@ public class Form4Historial extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String origen = req.getParameter("origen");
-        String destino = req.getParameter("destino");
+        float origin_lat = Float.parseFloat(req.getParameter("origin_lat"));
+        float origin_long = Float.parseFloat(req.getParameter("origin_long"));
+        float destiny_lat = Float.parseFloat(req.getParameter("destiny_lat"));
+        float destiny_long = Float.parseFloat(req.getParameter("destiny_long"));
         Double cost = Double.valueOf(req.getParameter("cost"));
 
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 
         Historial historial = new Historial();
-        historial.setOrigen(origen);
-        historial.setDestino(destino);
+        historial.setOrigin_lat(origin_lat);
+        historial.setOrigin_long(origin_long);
+        historial.setDestiny_lat(destiny_lat);
+        historial.setDestiny_long(destiny_long);
         historial.setCost(cost);
         historial.setAdvisor(usuario);
         historial.setDate(new Date());
@@ -45,6 +49,6 @@ public class Form4Historial extends HttpServlet {
 
         req.getSession().setAttribute("historial", historialList);
 
-        getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher("/UserView.jsp").forward(req, res);
     }
 }
