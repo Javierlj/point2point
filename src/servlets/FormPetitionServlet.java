@@ -22,7 +22,7 @@ import java.util.List;
 import org.json.*;
 
 import model.ServiceProvider;
-import dao.ServiceProviderDAOImplementaion;
+import dao.ServiceProviderDAOImplementation;
 
 @WebServlet("/FormPetitionServlet")
 public class FormPetitionServlet extends HttpServlet{
@@ -52,7 +52,7 @@ public class FormPetitionServlet extends HttpServlet{
 		ServiceProviderDAOImplementaion.getInstance().create(provider);
 		
 		*/
-		List<ServiceProvider> providers = ServiceProviderDAOImplementaion.getInstance().readAll();
+		List<ServiceProvider> providers = ServiceProviderDAOImplementation.getInstance().readAll();
 		System.out.println(providers);
 
 		try {

@@ -6,12 +6,12 @@ import org.hibernate.Session;
 
 import model.ServiceProvider;
 
-public class ServiceProviderDAOImplementaion implements ServiceProviderDAO {
-	public static ServiceProviderDAOImplementaion instance;
-	private ServiceProviderDAOImplementaion() {}
-	public static ServiceProviderDAOImplementaion getInstance() {
+public class ServiceProviderDAOImplementation implements ServiceProviderDAO {
+	public static ServiceProviderDAOImplementation instance;
+	private ServiceProviderDAOImplementation() {}
+	public static ServiceProviderDAOImplementation getInstance() {
 		if (instance == null) {
-			instance = new ServiceProviderDAOImplementaion();
+			instance = new ServiceProviderDAOImplementation();
 		}
 		return instance;
 	}
