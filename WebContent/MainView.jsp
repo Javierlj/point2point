@@ -7,16 +7,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Vista del usuario</title>
-<link rel="stylesheet" type="text/css" href="main.css" />
+	<link rel="stylesheet" type="text/css" href="main.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid p-0" style="display: flex ; flex-direction: column">
+<div class="d-flex" >
 	<div>
 		<h1>Hola ${usuario.name}!</h1>
 		<h2>Donde quieres ir hoy?</h2>
 	</div>
-	<div>
-		<a href="UserView.jsp">User</a>
+	<div class="ml-auto">
+		<span style="font-size: 50px">
+			<a href="UserView.jsp" class="fas fa-user icon-5x"style=" flex-direction: column"></a>
+		</span>
 	</div>
 </div>
 
