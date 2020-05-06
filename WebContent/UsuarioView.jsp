@@ -10,13 +10,11 @@
 <title>Vista del usuario</title>
 <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
-<body>
+<body style="margin:15px">
 <div class="container-fluid p-0">
-		<h1>Hola ${usuario.name}!</h1>
-		<h2>Donde quieres ir hoy?</h2>
+		<h3>Donde quieres ir hoy?</h3>
 </div>
 <%@ include file = "MapView.jsp" %>
-<<<<<<< HEAD
 
 <h2>Viajes favoritos</h2>
 <table border="1">
@@ -49,32 +47,5 @@
 	<button type="submit">Añadir</button>
 </form>
 
-<h2>Historial de viajes realizados</h2>
-<table border="1">
-	<c:if test="${fn:length(historial) != 0}">
-		<th>Id</th><th>Fecha</th><th>Origen</th><th>Destino</th><th>Precio</th>
-		<c:forEach items="${historial}" var="histi">
-			<tr>
-				<td>${histi.id}</td>
-				<td>${histi.date}</td>
-				<td>${histi.origen}</td>
-				<td>${histi.destino}</td>
-				<td>${histi.cost} $</td>
-			</tr>
-		</c:forEach>
-	</c:if>
-	<c:if test="${fn:length(historial) == 0}">
-		<tr>
-			<td>Aún no ha realizado ningún viaje.</td>
-		</tr>
-	</c:if>
-</table>
-<h1>Añade un nuevo viaje al historial</h1>
-<form action="Form4Historial">
-	<input type="text" name="origen" placeholder="Origen">
-	<input type="text" name="destino" placeholder="Destino">
-	<input type="number" step="0.01" name="cost" placeholder="Precio">
-	<button type="submit">Añadir</button>
-</form>
 </body>
 </html>
