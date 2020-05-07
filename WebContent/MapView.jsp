@@ -47,7 +47,7 @@
     </form>
     <div class="row"  id="mapRoute">
         <div class="col">
-            <div id="googleMap" style="width:100%;height:500px;"></div>
+            <div id="googleMap" style="width:100%;height:35em;"></div>
         </div>
     </div>
     <div class="row" style="margin:15px 0px" id="cards">
@@ -100,6 +100,7 @@
     function myMap() {
         bounds = new google.maps.LatLngBounds()
         navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position)
             lat1 = position.coords.latitude;
             long1 = position.coords.longitude;
             var position1 = new google.maps.LatLng(lat1, long1);
@@ -161,7 +162,7 @@
         // Create the autocomplete object, restricting the search predictions to
         // geographical location types.
         autocomplete2 = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete2'), {types: ['geocode']});
+            document.getElementById('autocomplete2'), {types: ['geocode'], origin: new google.maps.LatLng(lat1, long1)});
 
         // Avoid paying for data that you don't need by restricting the set of
         // place fields that are returned to just the address components.
@@ -252,6 +253,26 @@
         directionsRenderer.setDirections(options[serviceName].response);
     }
 
+    function addHistorial(price){
+        $.ajax({
+            type: "POST",
+            url: "Form4Historial",
+            data: {
+                origin_lat:lat1,
+                origin_long:long1,
+                destiny_lat:lat2,
+                destiny_long:long2,
+                origin: place1.formatted_address,
+                destiny:place2.formatted_address,
+                cost: price,
+
+            },
+            dataType: "text",
+        });
+
+
+    }
+
     function addCard(serviceName,waypoints, paint){
         var time;
         var travelMode= options[serviceName].travelMode;
@@ -259,6 +280,7 @@
         var priceMin= options[serviceName].priceMin;
         var imageUrl= options[serviceName].imageUrl;
         var name= options[serviceName].name;
+
         return directionsService.route({
             origin: new google.maps.LatLng(lat1,long1),
             destination: new google.maps.LatLng(lat2,long2),
@@ -270,19 +292,22 @@
 
                 time= response.routes[0].legs.reduce((acc,currentValue)=>acc+currentValue.duration.value,0);
                 time=Math.ceil(time/60);
-
+                var price=(startPrice+priceMin*time).toFixed(2)
                 $('#cards').append('<div class="card" style="width: 18rem;margin-right: 10px">\n' +
                     '  <img class="card-img-top" style="height: 180px;" src='+imageUrl+' alt="Card image cap">\n' +
                     '  <div class="card-body">\n' +
                     '    <h5 class="card-title">'+name+'</h5>\n' +
                     '    <p class="card-text">Time: '+time+ ' minutos</p>\n' +
-                    '    <p class="card-text">Price: '+(startPrice+priceMin*time).toFixed(2)+' &euro;</p>\n' +
+                    '    <p class="card-text">Price: '+price+' &euro;</p>\n' +
                     '    <a href="#" onclick="setRoute(&quot;'+serviceName+'&quot;)" class="btn btn-primary">Calcular ruta</a>\n' +
+                    '    <a href="#" onclick="addHistorial('+price+')" class="btn btn-primary">Viaje realizado </a>\n' +
                     '  </div>\n' +
                     '</div>')
 
                 options[serviceName].response=response;
                 if(paint){
+                    place1= {
+                        formatted_address:response.routes[0].legs[0].start_address};
                     directionsRenderer.setDirections(response);
                 }
 
@@ -305,7 +330,7 @@
 
                     c.style.width = "35%";
                     c.style.overflow = "scroll";
-                    c.style.maxHeight = "500px";
+                    c.style.maxHeight = "35em";
 
                     var dir= document.createElement("div")
                     dir.id="directionsPanel"

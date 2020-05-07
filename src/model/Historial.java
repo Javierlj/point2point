@@ -18,6 +18,8 @@ public class Historial implements Serializable{
 	private float destiny_long;
 	private Date date;
 	private double cost;
+	private String origin;
+	private String destiny;
 	
 	@ManyToOne
 	private Usuario advisor;
@@ -97,6 +99,22 @@ public class Historial implements Serializable{
 
 	public void setAdvisor(Usuario advisor) {
 		this.advisor = advisor;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestiny() {
+		return destiny;
+	}
+
+	public void setDestiny(String destiny) {
+		this.destiny = destiny;
 	}
 
 	@Override

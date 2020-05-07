@@ -14,6 +14,8 @@ public class Favourite implements Serializable{
 	@Column(name = "id", updatable = false, nullable = false)
 	private String id;
 	private String name;
+	private String origin;
+	private String destiny;
 	private float origin_lat;
 	private float origin_long;
 	private float destiny_lat;
@@ -117,6 +119,22 @@ public class Favourite implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestiny() {
+		return destiny;
+	}
+
+	public void setDestiny(String destiny) {
+		this.destiny = destiny;
 	}
 
 }

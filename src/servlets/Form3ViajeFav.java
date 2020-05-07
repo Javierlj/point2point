@@ -19,14 +19,14 @@ import model.Favourite;
 @WebServlet("/Form3ViajeFav")
 public class Form3ViajeFav extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Form3ViajeFav() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Form3ViajeFav() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +34,9 @@ public class Form3ViajeFav extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = req.getParameter("name");
+		String origin = req.getParameter("origin");
+		String destiny = req.getParameter("destiny");
+
 		float origin_lat = Float.parseFloat(req.getParameter("origin_lat"));
 		float origin_long = Float.parseFloat(req.getParameter("origin_long"));
 		float destiny_lat = Float.parseFloat(req.getParameter("destiny_lat"));
@@ -46,6 +49,9 @@ public class Form3ViajeFav extends HttpServlet {
 		favourite.setOrigin_long(origin_long);
 		favourite.setDestiny_lat(destiny_lat);
 		favourite.setDestiny_long(destiny_long);
+		favourite.setDestiny(destiny);
+		favourite.setOrigin(origin);
+
 		favourite.setUsuario(usuario);
 
 		FavouriteDAOImplementation.getInstance().create(favourite);

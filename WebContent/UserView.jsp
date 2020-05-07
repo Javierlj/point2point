@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="margin:15px">
 <div class="d-flex">
     <h1 style="flex-direction: row"> ${usuario.name} </h1>
     <div class="ml-auto">
@@ -37,6 +37,8 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                <th>Origen</th>
+                <th>Destino</th>
                 <th>¿Quieres eliminarlo?</th>
             </tr>
         </thead>
@@ -44,11 +46,10 @@
         <tbody>
             <tr>
                 <td>${favi.name}</td>
+                <td>${favi.origin}</td>
+                <td>${favi.destiny}</td>
                 <td>
-                    <form action="FormDeleteFavourite">
-                        <input type="hidden" name="favid" value="${favi.id}" />
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
+                    <button onClick="deleteFavourite(${favi.id})" class="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -64,14 +65,10 @@
 </table>
 
 <h2>Añade un nuevo viaje favorito</h2>
-<form action="Form3ViajeFav" class="form-inline">
-    <input style="width: 200px" type="text" class="form-control mb-2 mr-sm-2"  name="id" placeholder="Identificador del viaje" required>
+<form action="Form3ViajeFav" id="form-fav" class="form-inline">
+    <input style="width: 200px" type="text" class="form-control mb-2 mr-sm-2"  name="id" id="fav-name" placeholder="Identificador del viaje" required>
     <input style="width: 200px" type="text" class="form-control mb-2 mr-sm-2" id="autocomplete1"  placeholder="Origen" required>
     <input style="width: 200px" type="text" class="form-control mb-2 mr-sm-2" id="autocomplete2"  placeholder="Destino" required>
-    <input type="hidden" id="origin_lat" name="origin_lat" >
-    <input type="hidden" id="destiny_lat" name="destiny_lat" >
-    <input type="hidden" id="origin_long" name="origin_long">
-    <input type="hidden" id="destiny_long" name="destiny_long">
     <button type="submit" class="btn btn-light">Añadir</button>
 </form>
 <script>
@@ -79,17 +76,46 @@
         document.getElementById('autocomplete1'))
     autocomplete2 = new google.maps.places.Autocomplete(
         document.getElementById('autocomplete2'))
-    place1 = autocomplete1.getPlace();
-    let origin_lat= place1.geometry.location.lat()
-    document.getElementById("origin_lat").value = origin_lat;
-    let origin_long= place1.geometry.location.lng()
-    document.getElementById("destiny_lat").value = origin_long;
-    place2 = autocomplete2.getPlace();
-    let destiny_lat= place2.geometry.location.lat()
-    document.getElementById("origin_long").value = destiny_lat;
-    let destiny_long= place2.geometry.location.lng()
-    document.getElementById("destiny_long").value = destiny_long;
 
+    function deleteFavourite(id){
+        $.ajax({
+            type: "POST",
+            url: "FormDeleteFavourite",
+            data: {
+                favid:id
+
+            },
+            dataType: "text",
+            success: function(){
+                location.reload();
+            }
+        });
+    }
+
+    $("#form-fav").submit(function (e) {
+        e.preventDefault();
+        var origin = autocomplete1.getPlace();
+        var destiny = autocomplete2.getPlace();
+        var name=$("#fav-name").val();
+        $.ajax({
+            type: "POST",
+            url: "Form3ViajeFav",
+            data: {
+                name: name,
+                origin_lat:origin.geometry.location.lat(),
+                origin_long:origin.geometry.location.lng(),
+                destiny_lat:destiny.geometry.location.lat(),
+                destiny_long:origin.geometry.location.lng(),
+                origin: origin.formatted_address,
+                destiny:destiny.formatted_address
+
+            },
+            dataType: "text",
+            success: function(){
+                //location.reload();
+            }
+        });
+    })
 
 </script>
 
@@ -110,8 +136,8 @@
                 <tr>
                     <td>${histi.id}</td>
                     <td>${histi.date}</td>
-                    <td>${histi.origen}</td>
-                    <td>${histi.destino}</td>
+                    <td>${histi.origin}</td>
+                    <td>${histi.destiny}</td>
                     <td>${histi.cost} €</td>
                 </tr>
                 </tbody>
@@ -125,12 +151,6 @@
     </tbody>
     </c:if>
 </table>
-<h1>Añade un nuevo viaje al historial</h1>
-<form action="Form4Historial" >
-    <input type="text" class="form-control" name="origen" placeholder="Origen">
-    <input type="text" class="form-control" name="destino" placeholder="Destino">
-    <input type="number" class="form-control" step="0.1" name="cost" placeholder="Precio">
-    <button type="submit" class="btn btn-light">Añadir</button>
-</form>
+
 </body>
 </html>
