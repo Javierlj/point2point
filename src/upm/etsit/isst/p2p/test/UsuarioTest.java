@@ -25,7 +25,7 @@ class UsuarioTest {
 		Usuario user = new Usuario();
 		user.setName("Test");
 		user.setLast_name("Test");
-		user.setEmail("upm.etsit.isst.p2p.test@email.com");
+		user.setEmail("test@email.com");
 		user.setPassword("1234");
 		user.setViajes_fav( viajes_fav);
 		user.setHistorial(new ArrayList<Historial>());
@@ -41,7 +41,7 @@ class UsuarioTest {
 		Usuario user = new Usuario();
 		user.setName("Test");
 		user.setLast_name("Test");
-		user.setEmail("upm.etsit.isst.p2p.test@email.com");
+		user.setEmail("test@email.com");
 		user.setPassword("1234");
 		user.setViajes_fav( viajes_fav);
 		user.setHistorial(new ArrayList<Historial>());
@@ -53,13 +53,13 @@ class UsuarioTest {
 	void readTest() {
 		Usuario user2 = new Usuario();
 		user2.setName("Test");
-		user2.setEmail("upm.etsit.isst.p2p.test@email.com");
+		user2.setEmail("test@email.com");
 		user2.setPassword("1234");
 		user2.setLast_name("Test");
 		List<Favourite> viajes_fav = new ArrayList<Favourite>();
 		user2.setViajes_fav( viajes_fav);
 		user2.setHistorial(new ArrayList<Historial>());
-		Usuario user = UsuarioDAOImplementation.getInstance().read("upm.etsit.isst.p2p.test@email.com");
+		Usuario user = UsuarioDAOImplementation.getInstance().read("test@email.com");
 		assertEquals(user.getName(),user2.getName());
 		assertEquals(user.getLast_name(),user2.getLast_name());
 		assertEquals(user.getPassword(),user2.getPassword());	
@@ -68,14 +68,14 @@ class UsuarioTest {
 	void deleteTest() {
 		Usuario user = new Usuario();
 		user.setName("Test");
-		user.setEmail("upm.etsit.isst.p2p.test@email.com");
+		user.setEmail("test@email.com");
 		user.setLast_name("Test");
 		user.setPassword("1234");
 		List<Favourite> viajes_fav = new ArrayList<Favourite>();
 		user.setViajes_fav( viajes_fav);
 		user.setHistorial(new ArrayList<Historial>());
 		UsuarioDAOImplementation.getInstance().delete(user);
-		assertNull(UsuarioDAOImplementation.getInstance().read("upm.etsit.isst.p2p.test@email.com"));
+		assertNull(UsuarioDAOImplementation.getInstance().read("test@email.com"));
 	}
 	@Test
 	void readList() {
@@ -87,14 +87,14 @@ class UsuarioTest {
 	void updateTest() {
 		Usuario user2 = new Usuario();
 		user2.setName("Tes");
-		user2.setEmail("upm.etsit.isst.p2p.test@email.com");
+		user2.setEmail("test@email.com");
 		user2.setPassword("1234");
 		user2.setLast_name("Test");
 		List<Favourite> viajes_fav = new ArrayList<Favourite>();
 		user2.setViajes_fav(viajes_fav);
 		user2.setHistorial(new ArrayList<Historial>());
 		UsuarioDAOImplementation.getInstance().update(user2);
-		Usuario user = UsuarioDAOImplementation.getInstance().read("upm.etsit.isst.p2p.test@email.com");
+		Usuario user = UsuarioDAOImplementation.getInstance().read("test@email.com");
 		assertEquals(user2.getName(),user.getName());
 	}
 }

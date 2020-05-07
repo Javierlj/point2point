@@ -42,7 +42,7 @@ public class LoginTest {
     driver.findElement(By.id("name")).click();
     driver.findElement(By.id("name")).sendKeys("Carlos");
     driver.findElement(By.id("apellidos")).sendKeys("Arriaga");
-    driver.findElement(By.cssSelector(".form-group:nth-child(3) > #email")).sendKeys("upm.etsit.isst.p2p.test@gmail.com");
+    driver.findElement(By.cssSelector(".form-group:nth-child(3) > #email")).sendKeys("test@gmail.com");
     driver.findElement(By.cssSelector(".form-group:nth-child(4) > #password")).sendKeys("1234");
     driver.findElement(By.id("confirm-password")).click();
     driver.findElement(By.id("confirm-password")).sendKeys("1234");

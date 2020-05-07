@@ -36,7 +36,7 @@ public class MoveMapTest {
     driver.get("http://localhost:8080/Point2point/");
     driver.manage().window().setSize(new Dimension(1900, 1020));
     driver.findElement(By.id("email")).click();
-    driver.findElement(By.id("email")).sendKeys("upm.etsit.isst.p2p.test@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("test@gmail.com");
     driver.findElement(By.id("password")).sendKeys("1234");
     driver.findElement(By.id("password")).sendKeys(Keys.ENTER);
     {
