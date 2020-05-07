@@ -25,6 +25,7 @@ public class Form4Historial extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String origin = req.getParameter("origin");
         String destiny = req.getParameter("destiny");
         float origin_lat = Float.parseFloat(req.getParameter("origin_lat"));
@@ -47,9 +48,6 @@ public class Form4Historial extends HttpServlet {
         historial.setOrigin(origin);
         historial.setDestiny(destiny);
         HistorialDAOImplementation.getInstance().create(historial);
-
-        System.out.println(origin);
-        System.out.println(historial.getOrigin());
 
         List<Historial> historialList = (List<Historial>) req.getSession().getAttribute("historial");
         historialList.add(historial);

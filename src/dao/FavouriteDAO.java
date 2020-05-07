@@ -10,6 +10,5 @@ public interface FavouriteDAO {
 	public void delete(Favourite viaje);
 	public List<Favourite> readAll();
 	public Favourite readById(String id);
-	public Favourite login(String id, String origen, String destino);
 
 }

@@ -9,6 +9,5 @@ public interface HistorialDAO {
 	public void update(Historial viaje);
 	public void delete(Historial viaje);
 	public List<Historial> readAll();
-	public Historial login(String id, String origen, String destino);
 
 }
