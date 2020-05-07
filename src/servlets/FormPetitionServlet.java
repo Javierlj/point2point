@@ -51,7 +51,8 @@ public class FormPetitionServlet extends HttpServlet{
 		provider2.setScopeNeeded(false);
 		provider2.setToken("");
 		ServiceProviderDAOImplementation.getInstance().create(provider);
-		*/
+	*/
+
 
 		List<ServiceProvider> providers = ServiceProviderDAOImplementation.getInstance().readAll();
 		System.out.println("providers: "+providers);
