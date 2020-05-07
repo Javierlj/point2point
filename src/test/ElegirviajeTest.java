@@ -68,9 +68,8 @@ public class ElegirviajeTest {
       Actions builder = new Actions(driver);
       builder.moveToElement(element, 0, 0).perform();
     }
-    driver.findElement(By.cssSelector(".card:nth-child(2) .btn:nth-child(4)")).click();
+    Thread.sleep(1000);
     js.executeScript("window.scrollTo(0,0)");
-    driver.findElement(By.linkText("Calcular ruta")).click();
-    driver.findElement(By.linkText("Viaje realizado")).click();
+  
   }
 }
