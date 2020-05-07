@@ -34,14 +34,14 @@ public class FormPetitionServlet extends HttpServlet{
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
-		/*
-		ServiceProvider provider = new ServiceProvider();
+
+		/*ServiceProvider provider = new ServiceProvider();
 		provider.setName("Mobike");
 		provider.setUrl("http://global-n-mobike-g.mobike.com/api/nearby/v4/nearbyBikeInfo");
 		provider.setActive(true);
 		provider.setScopeNeeded(true);
 		provider.setToken("");
-		ServiceProviderDAOImplementaion.getInstance().create(provider);
+		ServiceProviderDAOImplementation.getInstance().create(provider);
 
 
 		ServiceProvider provider2 = new ServiceProvider();
@@ -50,10 +50,10 @@ public class FormPetitionServlet extends HttpServlet{
 		provider2.setActive(false);
 		provider2.setScopeNeeded(false);
 		provider2.setToken("");
-		ServiceProviderDAOImplementaion.getInstance().create(provider);
+		ServiceProviderDAOImplementation.getInstance().create(provider);
 		*/
 
-		List<ServiceProvider> providers = ServiceProviderDAOImplementaion.getInstance().readAll();
+		List<ServiceProvider> providers = ServiceProviderDAOImplementation.getInstance().readAll();
 		System.out.println("providers: "+providers);
 
 
