@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Favourite implements Serializable{
@@ -9,9 +10,16 @@ public class Favourite implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private String id;
-	private String origen;
-	private String destino;
+	private String name;
+	private String origin;
+	private String destiny;
+	private float origin_lat;
+	private float origin_long;
+	private float destiny_lat;
+	private float destiny_long;
 
 	@ManyToOne
 	private Usuario advisor;
@@ -21,57 +29,36 @@ public class Favourite implements Serializable{
 	}
 
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Favourite favourite = (Favourite) o;
+		return Float.compare(favourite.origin_lat, origin_lat) == 0 &&
+				Float.compare(favourite.origin_long, origin_long) == 0 &&
+				Float.compare(favourite.destiny_lat, destiny_lat) == 0 &&
+				Float.compare(favourite.destiny_long, destiny_long) == 0 &&
+				Objects.equals(id, favourite.id) &&
+				name.equals(favourite.name) &&
+				advisor.equals(favourite.advisor);
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((advisor == null) ? 0 : advisor.hashCode());
-		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((origen == null) ? 0 : origen.hashCode());
-		return result;
+		return Objects.hash(id, name, origin_lat, origin_long, destiny_lat, destiny_long, advisor);
 	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Favourite other = (Favourite) obj;
-		if (advisor == null) {
-			if (other.advisor != null)
-				return false;
-		} else if (!advisor.equals(other.advisor))
-			return false;
-		if (destino == null) {
-			if (other.destino != null)
-				return false;
-		} else if (!destino.equals(other.destino))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (origen == null) {
-			if (other.origen != null)
-				return false;
-		} else if (!origen.equals(other.origen))
-			return false;
-		return true;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "ViajeFav [id=" + id + ", origen=" + origen + ", destino=" + destino + ", advisor=" + advisor + "]";
+		return "Favourite{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", origin_lat=" + origin_lat +
+				", origin_long=" + origin_long +
+				", destiny_lat=" + destiny_lat +
+				", getDestiny_long=" + destiny_long +
+				", advisor=" + advisor +
+				'}';
 	}
 
 	public String getId() {
@@ -82,20 +69,44 @@ public class Favourite implements Serializable{
 		this.id = id;
 	}
 
-	public String getOrigen() {
-		return origen;
+	public String getName() {
+		return name;
 	}
 
-	public void setOrigen(String origen) {
-		this.origen = origen;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDestino() {
-		return destino;
+	public float getOrigin_lat() {
+		return origin_lat;
 	}
 
-	public void setDestino(String destino) {
-		this.destino = destino;
+	public void setOrigin_lat(float origin_lat) {
+		this.origin_lat = origin_lat;
+	}
+
+	public float getOrigin_long() {
+		return origin_long;
+	}
+
+	public void setOrigin_long(float origin_long) {
+		this.origin_long = origin_long;
+	}
+
+	public float getDestiny_lat() {
+		return destiny_lat;
+	}
+
+	public void setDestiny_lat(float destiny_lat) {
+		this.destiny_lat = destiny_lat;
+	}
+
+	public float getGetDestiny_long() {
+		return destiny_long;
+	}
+
+	public void setDestiny_long(float destiny_long) {
+		this.destiny_long = destiny_long;
 	}
 
 	public Usuario getAdvisor() {
@@ -108,6 +119,22 @@ public class Favourite implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestiny() {
+		return destiny;
+	}
+
+	public void setDestiny(String destiny) {
+		this.destiny = destiny;
 	}
 
 }

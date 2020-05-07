@@ -19,29 +19,39 @@ import model.Favourite;
 @WebServlet("/Form3ViajeFav")
 public class Form3ViajeFav extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Form3ViajeFav() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Form3ViajeFav() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = req.getParameter("id");
-		String origen = req.getParameter("origen");
-		String destino = req.getParameter("destino");
+		String name = req.getParameter("name");
+		String origin = req.getParameter("origin");
+		String destiny = req.getParameter("destiny");
+
+		float origin_lat = Float.parseFloat(req.getParameter("origin_lat"));
+		float origin_long = Float.parseFloat(req.getParameter("origin_long"));
+		float destiny_lat = Float.parseFloat(req.getParameter("destiny_lat"));
+		float destiny_long = Float.parseFloat(req.getParameter("destiny_long"));
 
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		Favourite favourite = new Favourite();
-		favourite.setId(id);
-		favourite.setOrigen(origen);
-		favourite.setDestino(destino);
+		favourite.setName(name);
+		favourite.setOrigin_lat(origin_lat);
+		favourite.setOrigin_long(origin_long);
+		favourite.setDestiny_lat(destiny_lat);
+		favourite.setDestiny_long(destiny_long);
+		favourite.setDestiny(destiny);
+		favourite.setOrigin(origin);
+
 		favourite.setUsuario(usuario);
 
 		FavouriteDAOImplementation.getInstance().create(favourite);
@@ -51,7 +61,7 @@ public class Form3ViajeFav extends HttpServlet {
 
 		req.getSession().setAttribute("favourites", favourites);
 		req.getSession().setAttribute("usuario", usuario);
-		getServletContext().getRequestDispatcher("/UsuarioView.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/UserView.jsp").forward(req, resp);
 	}
 
 	/**

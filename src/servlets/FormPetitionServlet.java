@@ -42,7 +42,8 @@ public class FormPetitionServlet extends HttpServlet{
 		provider.setScopeNeeded(true);
 		provider.setToken("");
 		ServiceProviderDAOImplementaion.getInstance().create(provider);
-		
+
+
 		ServiceProvider provider2 = new ServiceProvider();
 		provider2.setName("Hive");
 		provider2.setUrl("https://hive.frontend.fleetbird.eu/api/prod/v1.06/map/cars");
@@ -50,10 +51,11 @@ public class FormPetitionServlet extends HttpServlet{
 		provider2.setScopeNeeded(false);
 		provider2.setToken("");
 		ServiceProviderDAOImplementaion.getInstance().create(provider);
-		
 		*/
-		List<ServiceProvider> providers = ServiceProviderDAOImplementation.getInstance().readAll();
-		System.out.println(providers);
+
+		List<ServiceProvider> providers = ServiceProviderDAOImplementaion.getInstance().readAll();
+		System.out.println("providers: "+providers);
+
 
 		try {
 			for(int i = 0 ; i<providers.size();i++) {  //Iteracion sobre la lista de proveedores
