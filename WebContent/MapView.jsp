@@ -293,14 +293,16 @@
                 time= response.routes[0].legs.reduce((acc,currentValue)=>acc+currentValue.duration.value,0);
                 time=Math.ceil(time/60);
                 var price=(startPrice+priceMin*time).toFixed(2)
-                $('#cards').append('<div class="card" style="width: 18rem;margin-right: 10px">\n' +
+                $('#cards').append('<div class="card" style="width: 20rem;margin-right: 8px">\n' +
                     '  <img class="card-img-top" style="height: 180px;" src='+imageUrl+' alt="Card image cap">\n' +
                     '  <div class="card-body">\n' +
                     '    <h5 class="card-title">'+name+'</h5>\n' +
                     '    <p class="card-text">Time: '+time+ ' minutos</p>\n' +
                     '    <p class="card-text">Price: '+price+' &euro;</p>\n' +
-                    '    <a href="#" onclick="setRoute(&quot;'+serviceName+'&quot;)" class="btn btn-primary">Calcular ruta</a>\n' +
-                    '    <a href="#" onclick="addHistorial('+price+')" class="btn btn-primary">Viaje realizado </a>\n' +
+                    '    <div style="display: flex; justify-content: space-around">' +
+                    '      <a href="#" style="flex-direction: column" onclick="setRoute(&quot;'+serviceName+'&quot;)" class="btn btn-primary">Calcular ruta</a>\n' +
+                    '      <a href="#" style="flex-direction: column" onclick="addHistorial('+price+')" class="btn btn-primary">Viaje realizado </a>\n' +
+                    '    </div>' +
                     '  </div>\n' +
                     '</div>')
 
