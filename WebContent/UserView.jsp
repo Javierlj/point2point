@@ -112,7 +112,7 @@
             },
             dataType: "text",
             success: function(){
-                //location.reload();
+                location.reload();
             }
         });
     })
