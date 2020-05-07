@@ -67,10 +67,10 @@ public class FavouriteDAOImplementation implements FavouriteDAO {
 	public List<Favourite> readAll () {
 	  Session session = SessionFactoryService.get().openSession();
 	  session.beginTransaction();
-	  List<Favourite> p = session.createQuery("from Favourite").list();
+	  List<Favourite> favourites = session.createQuery("from Favourite").list();
 	  session.getTransaction().commit();
 	  session.close();
-	  return p;
+	  return favourites;
 	}
 
 	@Override
@@ -86,24 +86,6 @@ public class FavouriteDAOImplementation implements FavouriteDAO {
 		session.getTransaction().commit();
 		session.close();
 		return viaje;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Favourite login (String id, String origen, String destino) {
-	  Session session = SessionFactoryService.get().openSession();
-	  Favourite viaje = null;
-	  session.beginTransaction();
-	  Query q = session.createQuery("select p from Favourite p where p.id = :id and p.origen = :origen and p.destino = :destino");
-	  q.setParameter("id", id);
-	  q.setParameter("origen", origen);
-	  q.setParameter("destino", destino);
-	  List<Favourite> tfgs = q.getResultList();
-	  if (tfgs.size() > 0)
-	  	viaje = (Favourite) (q.getResultList().get(0));
-	  session.getTransaction().commit();
-	  session.close();
-	  return viaje;
 	}
 
 }

@@ -72,23 +72,5 @@ private static  HistorialDAOImplementation sfs = null;
 	  session.close();
 	  return p;
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Historial login (String id, String origen, String destino) {
-	  Session session = SessionFactoryService.get().openSession();
-	  Historial viaje = null;
-	  session.beginTransaction();
-	  Query q = session.createQuery("select p from Historial p where p.id = :id and p.origen = :origen and p.destino = :destino");
-	  q.setParameter("id", id);
-	  q.setParameter("origen", origen);
-	  q.setParameter("destino", destino);
-	  List<Historial> tfgs = q.getResultList();
-	  if (tfgs.size() > 0)
-	  	viaje = (Historial) (q.getResultList().get(0));
-	  session.getTransaction().commit();
-	  session.close();
-	  return viaje;
-	}
 
 }
